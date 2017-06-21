@@ -19,7 +19,7 @@ function updateLoggers() {
 
 export default {
     initialize(endpoint) {
-        url = endpoint;
+        url = window.location.pathname + endpoint;
         updateLoggers();
         setInterval(updateLoggers, 1000);
     },

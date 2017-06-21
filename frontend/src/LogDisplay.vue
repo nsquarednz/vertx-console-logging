@@ -46,7 +46,7 @@ export default {
     },
     beforeMount() {
         this.dateFormat = dateFormat;
-        this.eb = new EventBus(this.eventBusUrl);
+        this.eb = new EventBus(window.location.pathname + this.eventBusUrl);
         this.eb.onopen = () => {
             this.eb.registerHandler("vertx.console.logger.default", (e, m) => {
                 this.logMsgs.unshift(JSON.parse(m.body));
