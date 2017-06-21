@@ -134,7 +134,7 @@ export default {
     },
     methods: {
         updateLogger(logger) {
-            this.$http.post('/loggers/' + logger.name + '/update', { level: logger.effectiveLevel, include: 'all' })
+            this.$http.post(window.location.pathname + '/loggers/' + logger.name + '/update', { level: logger.effectiveLevel, include: 'all' })
                 .then(response => response.json())
                 .then(this.loggersCallback);
         },
