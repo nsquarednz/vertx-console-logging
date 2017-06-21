@@ -15,7 +15,7 @@
                         </div>
                         <div class="logger-entry-name">{{ logger.name }}</div>
                         <div class="logger-entry-level">
-                            <select class="btn btn-default" v-model="logger.effectiveLevel" v-on:change="updateLogger(logger)">
+                            <select class="btn" :class="getButtonClassForLevel(logger.effectiveLevel)" v-model="logger.effectiveLevel" v-on:change="updateLogger(logger)">
                                 <option v-for="level in levels">{{ level }}</option>
                             </select>
                         </div>
@@ -153,6 +153,17 @@ export default {
                 this.hiddenLoggers.push(loggerName);
             } else {
                 this.hiddenLoggers.splice(this.hiddenLoggers.findIndex(el => el === loggerName), 1);
+            }
+        },
+        getButtonClassForLevel(level) {
+            if (level === 'ALL') {
+                return 'btn-primary';
+            } else if (level === 'WARN') {
+                return 'btn-warning';
+            } else if (level === 'ERROR') {
+                return 'btn-danger';
+            } else {
+                return 'btn-default';
             }
         }
     },

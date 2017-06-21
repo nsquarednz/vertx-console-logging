@@ -1,6 +1,6 @@
 <template>
     <div class="log-display">
-        <div class="log-line" v-for="logElement in logMsgs" v-if="!hiddenStatuses[logElement.logger]">[{{ dateFormat(logElement.date, 'HH:MM:ss') }}] [{{ logElement.level }}] {{ logElement.logger }} - {{ logElement.message }}</div>
+        <div class="log-line" :class="getClassForLevel(logElement.level)" v-for="logElement in logMsgs" v-if="!hiddenStatuses[logElement.logger]">[{{ dateFormat(logElement.date, 'HH:MM:ss') }}] [{{ logElement.level }}] {{ logElement.logger }} - {{ logElement.message }}</div>
     </div>
 </template>
 
@@ -11,9 +11,7 @@
     font-family: monospace;
     height: 100%;
     overflow-y: scroll;
-    padding: 10px;
-
-    // Snap to bottom
+    padding: 10px; // Snap to bottom
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -21,6 +19,14 @@
     -webkit-box-direction: reverse;
     -ms-flex-direction: column-reverse;
     flex-direction: column-reverse;
+
+    .line-warn {
+        color: #fda331;
+    }
+
+    .line-err {
+        color: #fb0120;
+    }
 }
 </style>
 
@@ -52,6 +58,17 @@ export default {
     },
     beforeDestroy() {
         this.eb.close();
+    },
+    methods: {
+        getClassForLevel(level) {
+            if (level === 'WARN') {
+                return 'line-warn';
+            } else if (level === 'ERROR') {
+                return 'line-err';
+            } else {
+                return null;
+            }
+        }
     }
 }
 </script>
