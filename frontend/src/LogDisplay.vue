@@ -8,7 +8,7 @@
 .log-display {
     background: #030303;
     color: #d1d1d1;
-    font-family: monospace;
+    font-family: Menlo, Monaco, Consolas, monospace;
     height: 100%;
     overflow-y: scroll;
     padding: 10px; // Snap to bottom
