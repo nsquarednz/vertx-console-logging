@@ -9,15 +9,14 @@
             </div>
             <div class="loggers-display">
                 <div class="loggers-entries">
-                    <div class="logger-entry" v-for="logger in filteredLoggers">
+                    <div class="logger-entry" v-for="logger in filteredLoggers" :key="logger.name">
                         <div class="logger-entry-checkbox">
                             <input type="checkbox" :checked="!hiddenStatuses[logger.name]" :disabled="hiddenStatuses[logger.name] === 1" v-on:click="updateHiddenLoggers(logger.name, $event)">
                         </div>
                         <div class="logger-entry-name">{{ logger.name }}</div>
                         <div class="logger-entry-level">
-                            <select class="btn" :class="getButtonClassForLevel(logger.effectiveLevel)" v-model="logger.effectiveLevel" v-on:change="updateLogger(logger)">
-                                <option v-for="level in levels">{{ level }}</option>
-                            </select>
+                            <v-select v-model="logger.effectiveLevel" :options="levels" :buttonClass="getButtonClassForLevel(logger.effectiveLevel)" v-on:select="updateLogger(logger, $event)">
+                            </v-select>
                         </div>
                     </div>
                 </div>
@@ -85,6 +84,9 @@
 
             .logger-entry-level {
                 margin-left: auto;
+                .bootstrap-select {
+                    width: 80px;
+                }
             }
         }
     }
@@ -126,14 +128,15 @@ export default {
     computed: {
         filteredLoggers() {
             if (this.filterQuery.length === 0) {
-                return this.loggers;
+                return this.loggers.map(el => Object.assign({}, el));
             } else {
-                return this.loggers.filter(el => el.name.toLowerCase().includes(this.filterQuery.toLowerCase()));
+                return this.loggers.filter(el => el.name.toLowerCase().includes(this.filterQuery.toLowerCase())).map(el => Object.assign({}, el));
             }
         }
     },
     methods: {
-        updateLogger(logger) {
+        updateLogger(logger, level) {
+            logger.effectiveLevel = level;
             this.$http.post(window.location.pathname + '/loggers/' + logger.name + '/update', { level: logger.effectiveLevel, include: 'all' })
                 .then(response => response.json())
                 .then(this.loggersCallback);

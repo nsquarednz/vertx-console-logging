@@ -43306,6 +43306,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     extends: __WEBPACK_IMPORTED_MODULE_0_vue_strap__["select"],
+    props: {
+        buttonClass: {
+            type: String,
+            default: 'btn-default'
+        }
+    },
     computed: {
         classes: function classes() {
             return [this.isLi ? 'dropdown' : this.inInput ? 'input-group-btn' : 'btn-group', 'bootstrap-select', { open: this.show, disabled: this.disabled }, this.class];
@@ -43321,6 +43327,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             if (this.disabled && !this.show) return;
             this.show = !this.show;
             if (!this.show) this.$refs.btn.blur();
+        }
+    },
+    methods: {
+        userSelect: function userSelect(v) {
+            this.$emit('select', v);
+            this.select(v);
         }
     }
 });
@@ -44530,7 +44542,8 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }
   }, [_c('button', {
     ref: "btn",
-    staticClass: "btn btn-default dropdown-toggle",
+    staticClass: "btn",
+    class: _vm.buttonClass + ' dropdown-toggle',
     attrs: {
       "type": "button",
       "tabindex": "1",
@@ -44665,7 +44678,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       on: {
         "mousedown": function($event) {
           $event.preventDefault();
-          _vm.select(option[_vm.optionsValue])
+          _vm.userSelect(option[_vm.optionsValue])
         }
       }
     }, [_c('span', {
