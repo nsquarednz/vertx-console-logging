@@ -6,6 +6,10 @@ import io.vertx.ext.web.Router;
 
 @SuppressWarnings("unused")
 public class LoggingConsolePage implements ConsolePage {
+    public static LoggingConsolePage create() {
+        return new LoggingConsolePage();
+    }
+
     @Override
     public void mount(Vertx vertx, Router router, String basePath) {
         new LoggingHandler(router, vertx, basePath);
