@@ -27,6 +27,20 @@
     .line-err {
         color: #fb0120;
     }
+
+    &::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+        background-color: #000;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: #222;
+        border-radius: 4px;
+        &:hover,
+        &:active {
+            background: #444;
+        }
+    }
 }
 </style>
 
