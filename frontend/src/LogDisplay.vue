@@ -60,7 +60,7 @@ export default {
     beforeMount() {
         this.dateFormat = dateFormat;
         this.eb = new EventBus(window.location.pathname + this.eventBusUrl);
-        let msgCount = 0;
+        let msgCount = Number.MIN_SAFE_INTEGER;
         this.eb.onopen = () => {
             this.eb.registerHandler("vertx.console.logger.default", (e, m) => {
                 const msg = JSON.parse(m.body);
