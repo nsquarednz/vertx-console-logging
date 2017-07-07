@@ -29,13 +29,12 @@
     }
 
     &::-webkit-scrollbar {
-        width: 8px;
-        height: 8px;
-        background-color: #000;
+        width: 6px;
+        height: 6px;
+        background-color: transparent;
     }
     &::-webkit-scrollbar-thumb {
         background: #222;
-        border-radius: 4px;
         &:hover,
         &:active {
             background: #444;
