@@ -1,6 +1,6 @@
 <template>
     <div class="log-display">
-        <div class="log-line" :class="getClassForLevel(logElement.level)" v-for="logElement in logMsgs" v-if="!hiddenStatuses[logElement.logger]">[{{ dateFormat(logElement.date, 'HH:MM:ss') }}] [{{ logElement.level }}] {{ logElement.logger }} - {{ logElement.message }}</div>
+        <div class="log-line" :class="getClassForLevel(logElement.level)" v-for="logElement in logMsgs" v-if="!hiddenStatuses[logElement.logger]" :key="logElement.received">[{{ dateFormat(logElement.date, 'HH:MM:ss') }}] [{{ logElement.level }}] {{ logElement.logger }} - {{ logElement.message }}</div>
     </div>
 </template>
 
@@ -60,9 +60,13 @@ export default {
     beforeMount() {
         this.dateFormat = dateFormat;
         this.eb = new EventBus(window.location.pathname + this.eventBusUrl);
+        let msgCount = 0;
         this.eb.onopen = () => {
             this.eb.registerHandler("vertx.console.logger.default", (e, m) => {
-                this.logMsgs.unshift(JSON.parse(m.body));
+                const msg = JSON.parse(m.body);
+                msg.received = msgCount;
+                ++msgCount;
+                this.logMsgs.unshift(msg);
                 if (this.logMsgs.length > 250) {
                     this.logMsgs.pop();
                 }
