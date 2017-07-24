@@ -40,6 +40,9 @@
             background: #444;
         }
     }
+    &::-webkit-scrollbar-corner {
+        background: #030303;
+    }
 }
 </style>
 
