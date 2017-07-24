@@ -138,7 +138,7 @@ export default {
         updateLogger(logger, level) {
             logger.effectiveLevel = level;
             this.$http.post(window.location.pathname + '/loggers/' + logger.name + '/update', { level: logger.effectiveLevel, include: 'all' })
-                .then(response => response.json())
+                .then(response => response.data)
                 .then(this.loggersCallback);
         },
         getHiddenStatus(loggerName) {
