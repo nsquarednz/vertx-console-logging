@@ -37,6 +37,7 @@
 
 .loggers-toolbar {
     background-color: #f5f5f5;
+    background-image: linear-gradient(to bottom, #fafafa 0, #f5f5f5 100%);
     padding: 10px 20px;
     margin-bottom: 0px;
 
