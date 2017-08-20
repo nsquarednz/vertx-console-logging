@@ -28,7 +28,7 @@ public class LoggingHandler {
     private static final String JSON_CONTENT_TYPE = "application/json";
     private static final String ROOT_LOGGER_NAME = ch.qos.logback.classic.Logger.ROOT_LOGGER_NAME;
 
-    public LoggingHandler(Router router, Vertx vertx, String basePath) {
+    LoggingHandler(Router router, Vertx vertx, String basePath) {
         this.eventBus = vertx.eventBus();
 
         // Set up streaming
