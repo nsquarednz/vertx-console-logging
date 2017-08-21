@@ -6,6 +6,11 @@ import io.vertx.ext.web.Router;
 
 @SuppressWarnings("unused")
 public class LoggingConsolePage implements ConsolePage {
+    /**
+     * Creates the logging console page, reading from the ROOT logger
+     *
+     * @return the console page
+     */
     public static LoggingConsolePage create() {
         return new LoggingConsolePage();
     }
