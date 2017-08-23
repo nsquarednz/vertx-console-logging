@@ -21,8 +21,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Arrays;
 import java.util.List;
 
-
-public class LoggingHandler {
+class LoggingHandler {
     private final EventBus eventBus;
     private static final String PREFIX = "vertx.console.logger.";
     private static final String JSON_CONTENT_TYPE = "application/json";
